@@ -7,7 +7,7 @@ Window {
     flags: Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint
     visible: false
     width: 400
-    height: 200 + rectInPut.height +rectInPut.height
+    height: 200 + rectInPut.height +rectOutput.height
     color: "#00000000"
 
     Rectangle{

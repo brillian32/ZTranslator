@@ -11,11 +11,16 @@ set(AUTOMOC ON)
 find_package(Qt6 COMPONENTS Multimedia StateMachine Network REQUIRED)
 find_package(Doxygen)
 
-add_library(${PROJECT_NAME} STATIC
+set(CMAKE_DEBUG_POSTFIX "D")
+add_library(${PROJECT_NAME} SHARED
     src/qonlinetranslator.cpp
     src/qonlinetts.cpp
     src/qexample.cpp
     src/qoption.cpp
+    src/qonlinetranslator.h
+    src/qonlinetts.h
+    src/qexample.h
+    src/qoption.h
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Network)

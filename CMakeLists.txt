@@ -7,11 +7,21 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_subdirectory(3rd)
 include_directories(3rd/src)
+
 find_package(Qt6 6.2 COMPONENTS Quick Widgets REQUIRED)
 
-#link_libraries( QOnlineTranslator)
+source_group(Interface FILES
+   3rd/src/qonlinetranslator.h
+)
+
+source_group(QMLFile FILES
+   main.qml
+   MainWindow.qml
+)
+
 qt_add_executable(appTranslater
     main.cpp
+    3rd/src/qonlinetranslator.h
     ztranslatertool.h
     ztranslatertool.cpp
 )
