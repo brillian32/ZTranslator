@@ -92,8 +92,10 @@ Window {
         }
         onDoubleClicked: {
             if(mainWindow.width === 0 ||!mainWindow.visible){
+                screenshotBackWin.show()
                 mainWindow.showWithAnimation()
                 console.log("show")
+
             }
             else{
                 mainWindow.hideWithAnimation();
@@ -107,6 +109,10 @@ Window {
         x:quickWin.x + 50/screen.devicePixelRatio
         y:quickWin.y + 50/screen.devicePixelRatio
 
+    }
+
+    FullScreenWindow{
+        id:screenshotBackWin
     }
 
 }
