@@ -17,6 +17,8 @@ source_group(Interface FILES
 source_group(QMLFile FILES
    main.qml
    MainWindow.qml
+   FullScreenWindow.qml
+   Screenshot.qml
 )
 
 qt_add_executable(appTranslater
@@ -29,7 +31,7 @@ qt_add_executable(appTranslater
 qt_add_qml_module(appTranslater
     URI Translater
     VERSION 1.0
-    QML_FILES main.qml  MainWindow.qml
+    QML_FILES main.qml  MainWindow.qml    FullScreenWindow.qml Screenshot.qml
 )
 
 set_target_properties(appTranslater PROPERTIES
