@@ -38,7 +38,7 @@ Window {
                            strokeArea.clicked = true
                            strokeArea.start.x = event.x
                            strokeArea.start.y = event.y
-                            fullFill.color = "#00000000"
+                            //fullFill.color = "#00000000"
                        }
             onPositionChanged: (event)=>
                                {
@@ -52,8 +52,10 @@ Window {
                                }
             onReleased: {
                 strokeArea.clicked = false
+                fullFill.color = "blue"
                 fullFill.opacity = 0.5
-                strokeArea.opacity = 0.2
+                strokeArea.opacity = 0.1
+                strokeArea.color = "#00000000"
                 strokeArea.grabToImage(function(result) {
                                        result.saveToFile("C:\\Qt\\cccccc.png");
                                    });

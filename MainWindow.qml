@@ -126,6 +126,7 @@ Window {
             anchors.fill: parent
             onClicked: {
                 cppTranslaterTool.translate(textInput.text);
+                cppOcrProcess.startOCR("C:\\Users\\17305\\Pictures\\dd.png");
                 resultsTranslate.text = cppTranslaterTool.getTranlateResults()
             }
         }
