@@ -10,6 +10,7 @@
 
 bool ProgressCallBack(int progress, int left, int right, int top, int bottom)
 {
+    qDebug()<<"OCR progress...";
     qDebug()<< QString::number(progress);
     return true;
 }

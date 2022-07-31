@@ -10,8 +10,8 @@ ZTranslaterTool::ZTranslaterTool(QObject *parent)
             // Code in this block will run in another thread
             m_results = m_translator.translation();
             qInfo() << "translate result:";
-            qInfo() << "SOURCE:" << m_translator.translation();
-            qInfo() << "OUT:" << m_translator.source();
+            qInfo() << "RESULTS:" << m_translator.translation();
+            qInfo() << "SOURCE:" << m_translator.source();
             emit finish(StatuCode::success);
         }
         else
