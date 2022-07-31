@@ -16,7 +16,7 @@ Window {
     flags: Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint
     visible: false
     width: 400
-    height: 200 + rectInPut.height +rectOutput.height
+    height: 100 + rectInPut.height +rectOutput.height
     color: "#00000000"
 
     Rectangle{
@@ -34,16 +34,16 @@ Window {
             target: mainWindow
             properties: "height"
             from:0
-            to: 280
+            to: 100 + rectInPut.height +rectOutput.height
             duration: 200
         }
-        PropertyAnimation{
-            target: mainWindow
-            properties: "width"
-            from:0
-            to: 400
-            duration: 200
-        }
+//        PropertyAnimation{
+//            target: mainWindow
+//            properties: "width"
+//            from:0
+//            to: 400
+//            duration: 200
+//        }
     }
 
     ParallelAnimation{
@@ -52,19 +52,19 @@ Window {
 
             target: mainWindow
             properties: "height"
-            from:280
+            from:100 + rectInPut.height +rectOutput.height
             to: 0
             duration: 100
             easing.type: Easing.InOutQuad
         }
-        PropertyAnimation{
-            target: mainWindow
-            properties: "width"
-            from:400
-            to: 0
-            duration: 100
-            easing.type: Easing.InOutQuad
-        }
+//        PropertyAnimation{
+//            target: mainWindow
+//            properties: "width"
+//            from:400
+//            to: 0
+//            duration: 100
+//            easing.type: Easing.InOutQuad
+//        }
 
     }
 

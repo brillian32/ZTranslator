@@ -2,7 +2,6 @@ import QtQuick
 import QtQuick.Controls
 
 Window {
-
     id:screenshotBackWin
     visible: false
     width: Screen.desktopAvailableWidth
@@ -30,11 +29,8 @@ Window {
             y:start.y
             color: "#00000000"
             //opacity: 0.2
-
             border.color: "blue"
             border.width: 8
-
-            
         }
 
         MouseArea{

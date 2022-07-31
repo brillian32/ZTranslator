@@ -89,7 +89,7 @@ Window {
                 quickWin.setY(quickWin.y+delta.y)
         }
         onDoubleClicked: {
-            if(mainWindow.width === 0 ||!mainWindow.visible){
+            if(mainWindow.height === 0 ||!mainWindow.visible){
                 //screenshotBackWin.show()
                 mainWindow.showWithAnimation()
                 console.log("show")
