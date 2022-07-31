@@ -79,54 +79,60 @@ Window {
         closeAni.start()
     }
 
-    Rectangle {
+//    ScrollView{
+//        id:scroll
+//        //width: 530
+//        width:mainWindow.width -100
+//        height: Screen.desktopAvailableHeight
+        Rectangle {
 
-        id:rectInPut
-        width: parent.width-20
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: parent.top
-        anchors.topMargin: 50
-        height: textInput.lineCount *20
-        color: "lightgrey"
-        border.color: "grey"
+            id:rectInPut
+            width: parent.width-20
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: parent.top
+            anchors.topMargin: 50
+            height: textInput.contentHeight
+            color: "lightgrey"
+            border.color: "grey"
 
-        TextEdit {
-            id:textInput
-            leftPadding :4
-            text: "input text"
-            selectByMouse:true
-            font.family: "Microsoft YaHei"
-            selectedTextColor: "red"
-            selectionColor: "green"
-            anchors.fill: parent
-            color: "black"
-            wrapMode :TextInput.WordWrap
+            TextEdit {
+                id:textInput
+                leftPadding :4
+                text: "input text"
+                selectByMouse:true
+                font.family: "Microsoft YaHei"
+                selectedTextColor: "red"
+                selectionColor: "green"
+                anchors.fill: parent
+                color: "black"
+                wrapMode :TextInput.WordWrap
+            }
         }
-    }
 
-    Rectangle {
-        id:rectOutput
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: rectInPut.bottom
-        anchors.topMargin: 20
-        width: parent.width-20
-        height: resultsTranslate.lineCount *20
-        color: "lightgrey"
-        border.color: "grey"
-        TextEdit {
-            id:resultsTranslate
-            leftPadding :4
-            font.family: "Microsoft YaHei"
-            text: ""
-            anchors.fill: parent
-            selectByMouse:true
-            selectedTextColor: "red"
-            selectionColor: "green"
-            color: "black"
-            wrapMode :TextInput.WordWrap
+        Rectangle {
+            id:rectOutput
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: rectInPut.bottom
+            anchors.topMargin: 20
+            width: parent.width-20
+            height: resultsTranslate.contentHeight
+            color: "lightgrey"
+            border.color: "grey"
+            TextEdit {
+                id:resultsTranslate
+                leftPadding :4
+                font.family: "Microsoft YaHei"
+                text: ""
+                anchors.fill: parent
+                selectByMouse:true
+                selectedTextColor: "red"
+                selectionColor: "green"
+                color: "black"
+                wrapMode :TextInput.WordWrap
 
+            }
         }
-    }
+  //  }
     Button{
         text:"doTranslate"
         width:78
