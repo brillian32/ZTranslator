@@ -5,11 +5,12 @@
 #include <tesseract/baseapi.h>
 #include <tesseract/ocrclass.h>
 #include <leptonica/allheaders.h>
+#include  <qwidget>
+#include <QPoint>
 
 bool ProgressCallBack(int progress, int left, int right, int top, int bottom)
 {
-    auto progress_ = progress * (1.0) / (64.0 / 100.0);
-    qDebug()<< QString::number(qRound(progress_));
+    qDebug()<< QString::number(progress);
     return true;
 }
 
@@ -34,7 +35,10 @@ void ZOcrProcess::OCRThtread(QString imagePath)
     monitor.progress_callback = ProgressCallBack;
     api->Recognize(&monitor);
     char* outText = api->GetUTF8Text();
+    qDebug() << "OCR finish:";
     qDebug() << outText;
+    m_results = QString(outText);
+    emit finish();
     // Destroy used object and release memory
     api->End();
     pixDestroy(&image);
@@ -44,6 +48,18 @@ void ZOcrProcess::OCRThtread(QString imagePath)
 void ZOcrProcess::setTrainDataPath(const QString path)
 {
     m_trainDataPath = path;
+}
+
+QString ZOcrProcess::getResults()
+{
+    return  m_results;
+}
+
+void ZOcrProcess::grabScreen(QQuickWindow* window, int x, int y,int width,int height)
+{
+    auto pix = window->screen()->grabWindow(0,x,y,width,height);
+    pix.save("C:\\Users\\17305\\Pictures\\ff.png");
+    return;
 }
 
 

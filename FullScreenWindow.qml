@@ -5,9 +5,9 @@ Window {
 
     id:screenshotBackWin
     visible: false
-    width: 1000//Screen.desktopAvailableWidth
-    height:1000//Screen.desktopAvailableHeight
-    //flags: Qt.FramelessWindowHint
+    width: Screen.desktopAvailableWidth
+    height:Screen.desktopAvailableHeight
+    flags: Qt.FramelessWindowHint
     color: "#00000000"
 
     Rectangle
@@ -28,8 +28,13 @@ Window {
             height: end.y - start.y
             x:start.x
             y:start.y
-            color: "red"
-            opacity: 0.2
+            color: "#00000000"
+            //opacity: 0.2
+
+            border.color: "blue"
+            border.width: 8
+
+            
         }
 
         MouseArea{
@@ -38,7 +43,8 @@ Window {
                            strokeArea.clicked = true
                            strokeArea.start.x = event.x
                            strokeArea.start.y = event.y
-                            //fullFill.color = "#00000000"
+                           fullFill.color = "#00000000"
+                           //strokeArea.opacity = 0
                        }
             onPositionChanged: (event)=>
                                {
@@ -46,20 +52,20 @@ Window {
                                    {
                                        strokeArea.end.x = event.x
                                        strokeArea.end.y = event.y
-
                                    }
 
                                }
             onReleased: {
-                strokeArea.clicked = false
+                strokeArea.clicked = false                
+
+                //strokeArea.opacity = 0.1
+                //strokeArea.color = "#00000000"
+                cppOcrProcess.grabScreen(screenshotBackWin, strokeArea.start.x,strokeArea.start.y,strokeArea.width,strokeArea.height);
+                cppOcrProcess.startOCR("C:\\Users\\17305\\Pictures\\ff.png");  
+                screenshotBackWin.hide()
                 fullFill.color = "blue"
-                fullFill.opacity = 0.5
-                strokeArea.opacity = 0.1
-                strokeArea.color = "#00000000"
-                strokeArea.grabToImage(function(result) {
-                                       result.saveToFile("C:\\Qt\\cccccc.png");
-                                   });
-                //screenshotBackWin.close()
+                strokeArea.end.x = 0
+                strokeArea.start.x = 0
             }
 
         }

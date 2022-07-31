@@ -3,6 +3,15 @@ import QtQuick.Controls
 
 Window {
 
+    function showTranslateResultTxt(ret)
+    {
+        resultsTranslate.text = cppTranslaterTool.getTranlateResults();
+    }
+
+    function updateInputTxt(ret)
+    {
+        textInput.text =cppOcrProcess.getResults();
+    }
     id:mainWindow
     flags: Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint
     visible: false
@@ -115,6 +124,7 @@ Window {
             selectionColor: "green"
             color: "black"
             wrapMode :TextInput.WordWrap
+
         }
     }
     Button{
@@ -125,11 +135,14 @@ Window {
         {
             anchors.fill: parent
             onClicked: {
-                cppTranslaterTool.translate(textInput.text);
-                cppOcrProcess.startOCR("C:\\Users\\17305\\Pictures\\dd.png");
-                resultsTranslate.text = cppTranslaterTool.getTranlateResults()
+                    mainWindow.tranlate();
             }
         }
     }
+
+    function tranlate(){
+        cppTranslaterTool.translate(textInput.text);
+    }
+
 
 }

@@ -6,21 +6,25 @@ project(ZTranslater VERSION 0.1 LANGUAGES CXX)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DQT_QML_DEBUG ")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DQT_QML_DEBUG -DQT_DECLARATIVE_DEBUG")
 #Ä£¿é·Ö×é
 set_property(GLOBAL PROPERTY USE_FOLDERS ON )
 set_property(GLOBAL PROPERTY AUTOGEN_PARALLEL ON )
 
 set(CMAKE_DEBUG_POSTFIX "D")
 
+set(3rdINTERFACE    
+   3rd/src/qonlinetranslator.h
+   3rd/hotkey/QHotkey/qhotkey.h 
+)
 add_subdirectory(3rd)
 include_directories(3rd/src)
 
-find_package(Qt6 6.2 COMPONENTS Quick Concurrent Widgets REQUIRED)
+find_package(Qt6 6.2 COMPONENTS Quick Concurrent Widgets QuickWidgets REQUIRED)
 find_package(Tesseract CONFIG REQUIRED)
 
 source_group(Include FILES
-   3rd/src/qonlinetranslator.h
+    ${3rdINTERFACE}
 )
 
 source_group(QMLFile FILES
@@ -32,12 +36,13 @@ source_group(QMLFile FILES
 
 qt_add_executable(appTranslater  
     main.cpp
-    3rd/src/qonlinetranslator.h
+    ${3rdINTERFACE}
     ztranslatertool.h
     ztranslatertool.cpp
     ZOcrProcess.h
     ZOcrProcess.cpp
-    ${RESOURCES}
+    ZMainApplication.h
+    ZMainApplication.cpp
 )
 
 qt_add_qml_module(appTranslater
@@ -62,14 +67,20 @@ if(CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Release"))
     set_target_properties(appTranslater PROPERTIES  WIN32_EXECUTABLE TRUE)
 endif()
 
+TARGET_COMPILE_DEFINITIONS(appTranslater
+  PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
+
 target_link_libraries(appTranslater
     PRIVATE Qt6::Quick 
     libtesseract
     Qt6::Widgets
     Qt6::Concurrent
+    Qt6::QuickWidgets
+    QHotkey::QHotkey
     QOnlineTranslator
 )
 
 install(TARGETS appTranslater
     BUNDLE DESTINATION .
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+)

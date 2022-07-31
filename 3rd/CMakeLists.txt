@@ -11,6 +11,7 @@ set(AUTOMOC ON)
 find_package(Qt6 COMPONENTS Multimedia StateMachine Network REQUIRED)
 find_package(Doxygen)
 
+
 #set(CMAKE_DEBUG_POSTFIX "D")
 add_library(${PROJECT_NAME} SHARED
     src/qonlinetranslator.cpp
@@ -26,6 +27,8 @@ set(LIBRARY_OUTPUT_PATH ..)
 target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Network)
 target_link_libraries(${PROJECT_NAME} PUBLIC Qt6::Multimedia Qt6::StateMachine)
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
+
+add_subdirectory(hotkey)
 
 if(DOXYGEN_FOUND)
     set(DOXYGEN_USE_MDFILE_AS_MAINPAGE README.md)

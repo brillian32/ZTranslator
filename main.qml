@@ -10,8 +10,6 @@ Window {
     flags: Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint
     color:"#00000000"
 
-
-
     Rectangle{
         id:rectOut
         color: "#c04d48"
@@ -92,12 +90,13 @@ Window {
         }
         onDoubleClicked: {
             if(mainWindow.width === 0 ||!mainWindow.visible){
-                screenshotBackWin.show()
+                //screenshotBackWin.show()
                 mainWindow.showWithAnimation()
                 console.log("show")
 
             }
             else{
+                //screenshotBackWin.hide()
                 mainWindow.hideWithAnimation();
                 console.log("hide");
             }
@@ -113,6 +112,22 @@ Window {
 
     FullScreenWindow{
         id:screenshotBackWin
+    }
+
+    function showTranslateResultTxt(param)
+    {
+        mainWindow.showTranslateResultTxt();
+    }
+
+    function updateInputText(param)
+    {
+        mainWindow.updateInputTxt();
+        mainWindow.tranlate();
+    }
+
+    function showScreenShotWindow(param)
+    {
+        screenshotBackWin.show();
     }
 
 }
