@@ -15,14 +15,14 @@ Window {
     id:mainWindow
     flags: Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint
     visible: false
-    width: 400
-    height: 100 + rectInPut.height +rectOutput.height
-    color: "#00000000"
+    width: 840
+    height: 540
+    color: colorSet.transparent
 
     Rectangle{
         id:backGround
         anchors.fill: parent
-        color: "#5a3838"
+        color: colorSet.backGround
         opacity: 0.5
         radius: 10
     }
@@ -34,16 +34,16 @@ Window {
             target: mainWindow
             properties: "height"
             from:0
-            to: 100 + rectInPut.height +rectOutput.height
-            duration: 200
+            to: 540
+            duration: 100
         }
-//        PropertyAnimation{
-//            target: mainWindow
-//            properties: "width"
-//            from:0
-//            to: 400
-//            duration: 200
-//        }
+        PropertyAnimation{
+            target: mainWindow
+            properties: "width"
+            from:0
+            to: 840
+            duration: 100
+        }
     }
 
     ParallelAnimation{
@@ -52,19 +52,19 @@ Window {
 
             target: mainWindow
             properties: "height"
-            from:100 + rectInPut.height +rectOutput.height
+            from:540
             to: 0
             duration: 100
             easing.type: Easing.InOutQuad
         }
-//        PropertyAnimation{
-//            target: mainWindow
-//            properties: "width"
-//            from:400
-//            to: 0
-//            duration: 100
-//            easing.type: Easing.InOutQuad
-//        }
+        PropertyAnimation{
+            target: mainWindow
+            properties: "width"
+            from:840
+            to: 0
+            duration: 100
+            easing.type: Easing.InOutQuad
+        }
 
     }
 
@@ -79,64 +79,96 @@ Window {
         closeAni.start()
     }
 
-//    ScrollView{
-//        id:scroll
-//        //width: 530
-//        width:mainWindow.width -100
-//        height: Screen.desktopAvailableHeight
         Rectangle {
-
             id:rectInPut
-            width: parent.width-20
-            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width/2-20
+            anchors.left: parent.left
+            anchors.leftMargin: 10
             anchors.top: parent.top
             anchors.topMargin: 50
-            height: textInput.contentHeight
-            color: "lightgrey"
+            height: 300/*textInput.contentHeight*/
+            color: colorSet.textBackGround
             border.color: "grey"
-
-            TextEdit {
-                id:textInput
-                leftPadding :4
-                text: "input text"
-                selectByMouse:true
-                font.family: "Microsoft YaHei"
-                selectedTextColor: "red"
-                selectionColor: "green"
+            ScrollView{
+                id:scrollViewInput
                 anchors.fill: parent
-                color: "black"
-                wrapMode :TextInput.WordWrap
+                ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+                ScrollBar.vertical.policy: ScrollBar.AlwaysOn
+
+                TextEdit {
+                    id:textInput
+                    leftPadding :4
+                    text: "input text"
+                    selectByMouse:true
+                    font.family: "Microsoft YaHei"
+                    selectedTextColor: colorSet.selectText
+                    selectionColor: colorSet.selectTextBack
+                    //anchors.fill: parent  //此处需要注释，取消填充
+                    width:rectInPut.width-20
+                    color: colorSet.text
+                    wrapMode :TextInput.Wrap
+                }
             }
+
         }
 
         Rectangle {
             id:rectOutput
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: rectInPut.bottom
-            anchors.topMargin: 20
-            width: parent.width-20
-            height: resultsTranslate.contentHeight
-            color: "lightgrey"
+            anchors.top: parent.top
+            anchors.topMargin: 50
+            anchors.left: rectInPut.right
+            anchors.leftMargin: 20
+            width: parent.width/2-20
+            height: 300/*resultsTranslate.contentHeight*/
+            color: colorSet.textBackGround
             border.color: "grey"
-            TextEdit {
-                id:resultsTranslate
-                leftPadding :4
-                font.family: "Microsoft YaHei"
-                text: ""
-                anchors.fill: parent
-                selectByMouse:true
-                selectedTextColor: "red"
-                selectionColor: "green"
-                color: "black"
-                wrapMode :TextInput.WordWrap
 
-            }
+            ScrollView{
+                id:scrollViewOutput
+                anchors.fill: parent
+                ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+                ScrollBar.vertical.policy: ScrollBar.AlwaysOn
+                TextEdit {
+                        id:resultsTranslate
+                        leftPadding :4
+                        font.family: "Microsoft YaHei"
+                        text: ""
+                        //anchors.fill: parent
+                        width:rectOutput.width-20
+                        selectByMouse:true
+                        selectedTextColor: colorSet.selectText
+                        selectionColor: colorSet.selectTextBack
+                        color: colorSet.text
+                        wrapMode :TextInput.Wrap
+                    }
         }
-  //  }
+    }
     Button{
+        id:btn
+        contentItem: Text {
+            text: btn.text
+            font: btn.font
+            opacity: enabled ? 1.0 : 0.7
+            color: btn.down ? colorSet.text : colorSet.overlay1
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            elide: Text.ElideRight
+        }
         text:"doTranslate"
+        x:10
+        y:10
         width:78
         height: 30
+
+        background: Rectangle {
+            anchors.fill: parent
+            opacity: enabled ? 1 : 0.7
+            border.color: btn.down ? colorSet.keyColor : colorSet.overlay1
+            border.width: 1
+            color:colorSet.keyColor
+            radius: 2
+        }
+
         MouseArea
         {
             anchors.fill: parent

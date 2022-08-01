@@ -27,18 +27,22 @@ source_group(Include FILES
     ${3rdINTERFACE}
 )
 
+set(QML_FILE
+    main.qml
+    MainWindow.qml
+    FullScreenWindow.qml
+    Screenshot.qml
+    ColorSetting.qml
+)
 source_group(QMLFile FILES
-   main.qml
-   MainWindow.qml
-   FullScreenWindow.qml
-   Screenshot.qml
+    ${QML_FILE}
 )
 
 qt_add_executable(appTranslater  
     main.cpp
     ${3rdINTERFACE}
-    ztranslatertool.h
-    ztranslatertool.cpp
+    Ztranslatertool.h
+    Ztranslatertool.cpp
     ZOcrProcess.h
     ZOcrProcess.cpp
     ZMainApplication.h
@@ -48,7 +52,7 @@ qt_add_executable(appTranslater
 qt_add_qml_module(appTranslater
     URI Translater
     VERSION 1.0
-    QML_FILES main.qml  MainWindow.qml    FullScreenWindow.qml Screenshot.qml   
+    QML_FILES main.qml  MainWindow.qml    FullScreenWindow.qml Screenshot.qml   ColorSetting.qml
    # RESOURCES
     #world.png
 )

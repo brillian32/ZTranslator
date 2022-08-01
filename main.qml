@@ -4,18 +4,22 @@ import QtQuick.Controls
 
 Window {
     id:quickWin
-    width: 50/screen.devicePixelRatio
-    height: 50/screen.devicePixelRatio
+    width: 48/screen.devicePixelRatio
+    height: 48/screen.devicePixelRatio
     visible: true
     flags: Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint
-    color:"#00000000"
+    color: colorSet.transparent
+
+    ColorSetting{
+        id:colorSet
+    }
 
     Rectangle{
         id:rectOut
-        color: "#c04d48"
-        opacity: 0.3
-        width: 50/screen.devicePixelRatio
-        height: 50/screen.devicePixelRatio
+        color: colorSet.keyColor
+        opacity: 0.25
+        width: quickWin.width
+        height: quickWin.height
         anchors.top: quickWin.top
         anchors.left: quickWin.left
         radius: 4
@@ -24,7 +28,7 @@ Window {
 
     Rectangle{
         id:rectIn
-        color: "#c04d48"
+        color: "#1d262f"
         anchors.centerIn: rectOut
         width: 36/screen.devicePixelRatio
         height: 36/screen.devicePixelRatio
@@ -33,7 +37,7 @@ Window {
         Text{
             id:textIn
             anchors.centerIn: rectIn
-            color:"#ffffff"
+            color:colorSet.keyColor
             //font.family: "Helvetica"
             font.pointSize: 9
             font.bold :true
