@@ -12,9 +12,11 @@ Window {
     Rectangle
     {
         id:fullFill
-        anchors.fill: screenshotBackWin
-        width: screenshotBackWin.width
-        height: screenshotBackWin.height
+        //anchors.fill: screenshotBackWin
+        x:0
+        y:0
+        width: Screen.desktopAvailableWidth
+        height: Screen.desktopAvailableHeight
         opacity: 0.5
         color: "blue"
 

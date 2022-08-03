@@ -109,12 +109,13 @@ Window {
 
     MainWindow{
         id:mainWindow
-        x:quickWin.x + 50/screen.devicePixelRatio
-        y:quickWin.y + 50/screen.devicePixelRatio
-
+        x:quickWin.x + 50
+        y:quickWin.y + 50
     }
 
     FullScreenWindow{
+        x:0
+        y:0
         id:screenshotBackWin
     }
 

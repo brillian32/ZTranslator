@@ -143,6 +143,42 @@ Window {
                     }
         }
     }
+
+        Text {
+            id:titleName
+            height: 9
+            width: contentWidth+5
+            font.bold: true
+            horizontalAlignment: Text.AlignHCenter
+            font.pointSize: 10
+            text: "发音:"
+            anchors.left: rectOutput.left
+            anchors.topMargin: 10
+            anchors.top:rectOutput.bottom
+            color: colorSet.text
+        }
+        Text{
+            id:interpretationOutpot //音译
+            anchors.top: rectOutput.bottom
+            anchors.topMargin: 10
+            anchors.left: titleName.right
+            anchors.leftMargin: 5
+            text:"interpretation Outpot"
+            font.bold: false
+            horizontalAlignment: Text.AlignHCenter
+            font.pointSize: 9
+            width: contentWidth
+            height: 10
+            color: colorSet.text
+        }
+
+        Item {
+            id: example
+            text: qsTr("text")
+
+        }
+
+
     Button{
         id:btn
         contentItem: Text {
